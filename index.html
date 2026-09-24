@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LookBeyond.io — Knowledge Discovery for Research</title>
+  <link rel="icon" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <style>
@@ -57,6 +58,8 @@
       font-weight: 700;
       letter-spacing: -0.02em;
     }
+
+    .logo-mark { display:block; object-fit:contain; flex-shrink:0; }
 
     .nav-cta {
       background: var(--yellow);
@@ -173,13 +176,132 @@
     }
     .btn-outline:hover { background: var(--cyan-dim); transform:translateY(-2px); }
 
-    /* VIDEO */
-    .video-section {
+    /* NAV ACTIONS */
+    .nav-actions { display:flex; align-items:center; gap:1.4rem; }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--cyan); }
+
+    @media (max-width:560px) { .nav-link { display:none; } }
+
+    /* LIVE ROUTE */
+    .tour-section {
       padding: .5rem 2rem 6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
+
+    .tour-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--bg2);
+      border: 1px solid rgba(0,212,255,.2);
+      border-radius: 14px;
+      padding: 2.4rem 2.2rem;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 60px rgba(0,212,255,.05);
+    }
+
+    @media (max-width:560px) { .tour-card { padding:1.8rem 1.2rem; } }
+
+    .tour-q {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .tour-lede {
+      font-size: .92rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+    }
+
+    .tour-route {
+      list-style: none;
+      text-align: left;
+      max-width: 540px;
+      margin: 0 auto 2rem;
+      border-left: 2px solid rgba(0,212,255,.25);
+      padding-left: 1.2rem;
+    }
+
+    .tour-route li {
+      position: relative;
+      font-size: .87rem;
+      color: var(--text);
+      padding: .5rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: .7rem;
+    }
+
+    .tour-route li::before {
+      content: '';
+      position: absolute;
+      left: -1.58rem;
+      top: 1.05rem;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--cyan);
+    }
+
+    .lyr {
+      flex-shrink: 0;
+      font-size: .63rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .18rem .5rem;
+      border-radius: 4px;
+    }
+
+    .lyr-pop { background: rgba(255,215,0,.14); color: var(--yellow); }
+    .lyr-sci { background: var(--cyan-dim);     color: var(--cyan); }
+
+    .tour-cta { display:inline-block; }
+    .tour-note { font-size:.74rem; color:var(--text-dim); margin-top:.9rem; }
+
+    /* PROVENANCE */
+    .provenance { padding: 6rem 2rem; }
+
+    .prov-lede {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .95rem;
+      line-height: 1.8;
+      max-width: 620px;
+      margin: -1.5rem auto 3rem;
+    }
+
+    .prov-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.2rem;
+    }
+
+    @media (max-width:768px) { .prov-grid { grid-template-columns:1fr; } }
+
+    .prov-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 2px solid rgba(0,212,255,.35);
+      border-radius: 10px;
+      padding: 1.6rem;
+    }
+
+    .prov-item h3 { font-size:.9rem; font-weight:700; margin-bottom:.55rem; }
+    .prov-item p  { font-size:.84rem; color:var(--text-muted); line-height:1.75; }
 
     .section-label {
       font-size: .7rem;
@@ -188,22 +310,6 @@
       text-transform: uppercase;
       color: var(--cyan);
       margin-bottom: 1rem;
-    }
-
-    .video-wrapper {
-      width: 100%;
-      max-width: 880px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(0,212,255,.2);
-      box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 60px rgba(0,212,255,.05);
-    }
-
-    .video-wrapper iframe {
-      display: block;
-      width: 100%;
-      aspect-ratio: 16/9;
-      border: none;
     }
 
     /* SHARED SECTION WRAPPER */
@@ -434,6 +540,16 @@
     }
 
     .footer-tagline { font-size:.75rem; color:var(--text-dim); margin-top:.2rem; }
+
+    .footer-app {
+      display: inline-block;
+      margin-top: .6rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--cyan);
+      text-decoration: none;
+    }
+    .footer-app:hover { text-decoration: underline; }
     .footer-copy { font-size:.74rem; color:var(--text-dim); text-align:right; line-height:1.6; }
 
     /* ANIMATIONS */
@@ -475,14 +591,13 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">
-    <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
-      <circle cx="12" cy="12" r="8" stroke="#00d4ff" stroke-width="2.5" fill="none"/>
-      <circle cx="22" cy="22" r="8" stroke="#ffd700" stroke-width="2.5" fill="none"/>
-      <circle cx="22" cy="12" r="5" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.6"/>
-    </svg>
+    <img src="logo.png" alt="" width="34" height="34" class="logo-mark" />
     LookBeyond.io
   </a>
-  <a href="#contact" class="nav-cta">Request Access →</a>
+  <div class="nav-actions">
+    <a href="#contact" class="nav-link">Design Partner Program</a>
+    <a href="https://app.lookbeyond.io" class="nav-cta">Open the app →</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -518,21 +633,67 @@
       LookBeyond helps research teams find non-obvious connections across documents, articles, and topics — combining semantic search, graph visualization, and AI explanations.
     </p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-yellow">Request Access →</a>
-      <a href="#demo" class="btn-outline">Watch Demo</a>
+      <a href="https://app.lookbeyond.io/visualizations?tour=owl-theory" class="btn-yellow">Play a route →</a>
+      <a href="#contact" class="btn-outline">Become a design partner</a>
     </div>
   </div>
 </section>
 
-<!-- VIDEO -->
-<section class="video-section" id="demo">
-  <div class="section-label">See it in action — Trump / Greenland case study</div>
-  <div class="video-wrapper">
-    <iframe
-      src="https://www.loom.com/embed/7dc11c380f554c65ab357428f2cefa4b"
-      allowfullscreen
-      allow="autoplay">
-    </iframe>
+<!-- LIVE ROUTE -->
+<section class="tour-section" id="demo">
+  <div class="section-label">See it in action — the owl theory</div>
+
+  <div class="tour-card">
+    <div class="tour-q">“Could a bird have killed her?”</div>
+    <p class="tour-lede">
+      A novelist is convicted of pushing his wife down the stairs. Years later the defence
+      proposes something absurd: an owl. LookBeyond builds the route from the trial to the
+      biomechanics of a raptor's foot — five documents that share no keyword, four hops,
+      each one explained.
+    </p>
+
+    <ol class="tour-route">
+      <li><span class="lyr lyr-pop">popular</span> Michael Peterson trial — Kathleen's death</li>
+      <li><span class="lyr lyr-pop">popular</span> Michael Peterson trial — the owl theory</li>
+      <li><span class="lyr lyr-sci">science</span> Before Azaria: a history of blaming animals for a death</li>
+      <li><span class="lyr lyr-sci">science</span> Documented harpy eagle attacks on humans</li>
+      <li><span class="lyr lyr-sci">science</span> Mechanical analysis of avian feet</li>
+    </ol>
+
+    <a href="https://app.lookbeyond.io/visualizations?tour=owl-theory" class="btn-yellow tour-cta">Play the route →</a>
+    <p class="tour-note">Opens the live graph. No account, no install.</p>
+  </div>
+</section>
+
+<!-- PROVENANCE -->
+<section class="provenance">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Where the data comes from</div>
+      <h2>Licensed sources, on the record</h2>
+    </div>
+    <p class="prov-lede">
+      Discovery tools are only as defensible as the corpus underneath them. Ours is built
+      licence first: nothing is downloaded until the terms are on file, and every document
+      keeps the licence it arrived under.
+    </p>
+    <div class="prov-grid">
+      <div class="prov-item">
+        <h3>Checked before it is fetched</h3>
+        <p>Each source's licence page is captured with a date and a checksum, and the importer
+        refuses to run without it. When the wording later changes, we are told.</p>
+      </div>
+      <div class="prov-item">
+        <h3>Filtered record by record</h3>
+        <p>Open access is not one thing. Records that forbid commercial use or derivative work
+        are skipped individually, not waved through because the aggregator looked permissive.</p>
+      </div>
+      <div class="prov-item">
+        <h3>Traceable back to the origin</h3>
+        <p>Every document carries its source, its licence and its link, so any claim you build
+        on a route can be followed back to where it came from.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -624,7 +785,7 @@
       <div class="avatar">P</div>
       <div>
         <div class="sig-name">Paweł Łączny</div>
-        <div class="sig-title">Founder, LookBeyond.io &nbsp;·&nbsp; Former PM at HPE, IBM, Google and DataWalk</div>
+        <div class="sig-title">Founder, LookBeyond.io &nbsp;·&nbsp; Former PM at Google, IBM, HPE</div>
       </div>
     </div>
   </div>
@@ -668,14 +829,11 @@
   <div class="footer-inner">
     <div>
       <a href="#" class="footer-logo">
-        <svg width="20" height="20" viewBox="0 0 34 34" fill="none">
-          <circle cx="12" cy="12" r="8" stroke="#00d4ff" stroke-width="2.5" fill="none"/>
-          <circle cx="22" cy="22" r="8" stroke="#ffd700" stroke-width="2.5" fill="none"/>
-          <circle cx="22" cy="12" r="5" stroke="#00d4ff" stroke-width="1.5" fill="none" opacity="0.6"/>
-        </svg>
+        <img src="logo.png" alt="" width="22" height="22" class="logo-mark" />
         LookBeyond.io
       </a>
       <div class="footer-tagline">Where Knowledge Connects</div>
+      <a href="https://app.lookbeyond.io" class="footer-app">Open the app →</a>
     </div>
     <div class="footer-copy">
       © 2026 LookBeyond.io<br/>
