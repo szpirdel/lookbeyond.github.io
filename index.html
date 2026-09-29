@@ -435,6 +435,94 @@
     .sig-name { font-weight:700; font-size:.9rem; }
     .sig-title { font-size:.78rem; color:var(--text-dim); margin-top:.15rem; }
 
+    /* TEAM */
+    .team {
+      padding: 6rem 2rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-lede {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: .93rem;
+      line-height: 1.8;
+      max-width: 620px;
+      margin: -1.5rem auto 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.6rem;
+    }
+
+    @media (max-width:860px) { .team-grid { grid-template-columns:1fr; max-width:420px; margin:0 auto; } }
+
+    .member { text-align: center; }
+
+    .member img {
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 1.1rem;
+      border: 2px solid rgba(0,212,255,.25);
+    }
+
+    .member h3 { font-size:1rem; font-weight:700; }
+
+    .member-role {
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin: .35rem 0 .8rem;
+    }
+
+    .member p { font-size:.84rem; color:var(--text-muted); line-height:1.75; }
+
+    /* THREE WAYS */
+    .ways { padding: 6rem 2rem 2rem; }
+
+    .ways-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.2rem;
+    }
+
+    @media (max-width:860px) { .ways-grid { grid-template-columns:1fr; } }
+
+    .way {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, transform .2s;
+    }
+    .way:hover { border-color: rgba(0,212,255,.35); transform: translateY(-3px); }
+
+    .way h3 { font-size:1rem; font-weight:700; margin-bottom:.6rem; }
+    .way p  { font-size:.85rem; color:var(--text-muted); line-height:1.75; flex:1; }
+
+    .way-cta {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    /* The first card is the one we want pressed. */
+    .ways-grid .way:first-child { border-color: rgba(255,215,0,.35); }
+    .ways-grid .way:first-child:hover { border-color: var(--yellow); }
+    .ways-grid .way:first-child .way-cta { color: var(--yellow); }
+
     /* CONTACT */
     .contact { padding: 6rem 2rem; }
 
@@ -595,7 +683,7 @@
     LookBeyond.io
   </a>
   <div class="nav-actions">
-    <a href="#contact" class="nav-link">Design Partner Program</a>
+    <a href="#ways" class="nav-link">Ways to start</a>
     <a href="https://app.lookbeyond.io" class="nav-cta">Open the app →</a>
   </div>
 </nav>
@@ -634,7 +722,7 @@
     </p>
     <div class="hero-actions">
       <a href="https://app.lookbeyond.io/visualizations?tour=owl-theory" class="btn-yellow">Play a route →</a>
-      <a href="#contact" class="btn-outline">Become a design partner</a>
+      <a href="#ways" class="btn-outline">Other ways to start</a>
     </div>
   </div>
 </section>
@@ -785,8 +873,87 @@
       <div class="avatar">P</div>
       <div>
         <div class="sig-name">Paweł Łączny</div>
-        <div class="sig-title">Founder, LookBeyond.io &nbsp;·&nbsp; Former PM at Google, IBM, HPE</div>
+        <div class="sig-title">Product &amp; corpus &nbsp;·&nbsp; Former PM at HPE, IBM and Google.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Who is building it</div>
+      <h2>Three people, named by what they do</h2>
+    </div>
+    <p class="team-lede">
+      No chief-something titles yet — at this stage they would describe an org chart that does
+      not exist. LookBeyond is pre-commercial: three co-creators shaping it with early partners
+      before anything is sold.
+    </p>
+    <div class="team-grid">
+
+      <div class="member">
+        <img src="team/pawel.png" alt="" width="150" height="150" loading="lazy" />
+        <h3>Paweł Łączny</h3>
+        <div class="member-role">Product &amp; corpus</div>
+        <p>Decides what the product is for and builds the licensed corpus underneath it —
+        which sources may be used, what each document carries with it, and which routes are
+        worth showing. Former PM at HPE, IBM, Google and DataWalk..</p>
+      </div>
+
+      <div class="member">
+        <img src="team/filip.png" alt="" width="150" height="150" loading="lazy" />
+        <h3>Filip Wójcik</h3>
+        <div class="member-role">Graph &amp; ML</div>
+        <p>Author of a book on graph neural networks, speaking on GraphRAG architecture at
+        Data Science Summit in November. Works on the graph model and on the quality of the
+        routes it produces — whether a connection holds, and how far it reaches.</p>
+      </div>
+
+      <div class="member">
+        <img src="team/ewelina.png" alt="" width="150" height="150" loading="lazy" />
+        <h3>Ewelina Czarnecka-Wójcik</h3>
+        <div class="member-role">Product design</div>
+        <p>Responsible for what someone understands in the first minute. A graph is easy to
+        make impressive and hard to make usable; her job is the second one.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THREE WAYS -->
+<section class="ways" id="ways">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-label">Three ways in</div>
+      <h2>Start where it suits you</h2>
+    </div>
+    <div class="ways-grid">
+
+      <a class="way" href="https://app.lookbeyond.io/visualizations?tour=owl-theory">
+        <h3>Take the tour</h3>
+        <p>Five documents, four hops, one question. Watch a route being built across
+        the graph, then keep exploring from where it ends. Nothing to install, no account.</p>
+        <span class="way-cta">Play a route →</span>
+      </a>
+
+      <a class="way" href="#contact" data-intent="partner">
+        <h3>Partner with us</h3>
+        <p>A small number of research organisations shape LookBeyond around how their work
+        actually happens — not as beta testers, as collaborators. Founding partners get free
+        access, forever.</p>
+        <span class="way-cta">Tell us about your team →</span>
+      </a>
+
+      <a class="way" href="#contact" data-intent="own-data">
+        <h3>Test on your own data</h3>
+        <p>Papers, reports, filings — your own set, in a private space, to see which of your
+        documents turn out to be connected, and to what outside them.</p>
+        <span class="way-cta">Ask for a test →</span>
+      </a>
+
     </div>
   </div>
 </section>
@@ -794,9 +961,9 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <div class="section-label">Design Partner Program</div>
-    <h2>Let's work together</h2>
-    <p class="contact-intro">
+    <div class="section-label" data-label>Design Partner Program</div>
+    <h2 data-heading>Let's work together</h2>
+    <p class="contact-intro" data-intro>
       I'm inviting a small number of research organisations to shape LookBeyond around real workflows. Founding partners get free access — forever.
     </p>
     <form
@@ -804,6 +971,7 @@
       action="https://formspree.io/f/mnjgqdoe"
       method="POST"
     >
+      <input type="hidden" name="intent" value="partner" data-intent-field />
       <div class="form-row">
         <input type="text" name="name" placeholder="Your name" required />
         <input type="email" name="email" placeholder="Work email" required />
@@ -817,7 +985,7 @@
         <option>Journalist</option>
         <option>Other</option>
       </select>
-      <textarea name="message" placeholder="What research problems are you working on? What would you explore with LookBeyond?"></textarea>
+      <textarea name="message" data-message placeholder="What research problems are you working on? What would you explore with LookBeyond?"></textarea>
       <button type="submit" class="submit-btn">Send Request →</button>
       <p class="form-note">No spam. I'll reply personally within 24 hours.</p>
     </form>
@@ -841,6 +1009,46 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Three ways in, one form and one inbox. The card you press sets a hidden
+  // field and rewords the form, so an answer arrives knowing what was asked.
+  (function () {
+    var INTENTS = {
+      partner: {
+        label: 'Design Partner Program',
+        heading: "Let's work together",
+        intro: "I'm inviting a small number of research organisations to shape LookBeyond around real workflows. Founding partners get free access — forever.",
+        message: 'What research problems are you working on? What would you explore with LookBeyond?'
+      },
+      'own-data': {
+        label: 'Test on your own data',
+        heading: 'Bring your own documents',
+        intro: 'Tell us what the set is and what you are trying to find in it. We load it into a private space and go through the first routes with you.',
+        message: 'What is the collection — papers, reports, filings? Roughly how many documents, and what would you hope to connect?'
+      }
+    };
+    var field = document.querySelector('[data-intent-field]');
+    var label = document.querySelector('[data-label]');
+    var heading = document.querySelector('[data-heading]');
+    var intro = document.querySelector('[data-intro]');
+    var message = document.querySelector('[data-message]');
+    if (!field) return;
+
+    document.querySelectorAll('[data-intent]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        var intent = el.getAttribute('data-intent');
+        var copy = INTENTS[intent];
+        if (!copy) return;
+        field.value = intent;
+        if (label) label.textContent = copy.label;
+        if (heading) heading.textContent = copy.heading;
+        if (intro) intro.textContent = copy.intro;
+        if (message) message.setAttribute('placeholder', copy.message);
+      });
+    });
+  })();
+</script>
 
 </body>
 </html>
