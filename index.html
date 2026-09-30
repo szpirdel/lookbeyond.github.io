@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LookBeyond.io — Knowledge Discovery for Research</title>
+  <meta name="description" content="LookBeyond finds the route between documents that share no keywords — from a popular article to peer-reviewed research, with the reason for every step. Discovery paths built on semantic search over a licensed corpus." />
   <link rel="icon" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,600;9..40,700&display=swap" rel="stylesheet" />
@@ -90,7 +91,7 @@
       position: absolute;
       inset: 0;
       z-index: 0;
-      opacity: 0.2;
+      opacity: 0.45;
       pointer-events: none;
     }
 
@@ -662,26 +663,31 @@
       50%      { opacity:.3; }
     }
 
-    .edge { animation: edgeFade 4s ease-in-out infinite; }
-    .edge:nth-child(2) { animation-delay:.8s; }
-    .edge:nth-child(3) { animation-delay:1.6s; }
-    .edge:nth-child(4) { animation-delay:2.4s; }
+    /* The map is scenery and must stay quiet; only the route moves. */
+    .hero-map line   { stroke: var(--cyan); stroke-width: 1; opacity: .10; }
+    .hero-map circle { fill: var(--cyan); opacity: .20; }
 
-    .gnode { animation: nodePulse 3s ease-in-out infinite; }
-    .gnode:nth-child(6)  { animation-delay:.5s; }
-    .gnode:nth-child(7)  { animation-delay:1s; }
-    .gnode:nth-child(8)  { animation-delay:1.5s; }
-    .gnode:nth-child(9)  { animation-delay:2s; }
-    .gnode:nth-child(10) { animation-delay:2.5s; }
+    .hero-route { transition: opacity 1.4s ease; }
 
-    @keyframes edgeFade {
-      0%,100% { opacity:.15; }
-      50%      { opacity:.5; }
+    .hero-route line {
+      stroke: var(--cyan);
+      stroke-width: 3;
+      opacity: .9;
+      transition: stroke-dashoffset 1.15s cubic-bezier(.4,0,.2,1);
     }
 
-    @keyframes nodePulse {
-      0%,100% { opacity:.5; }
-      50%      { opacity:1; }
+    .hero-route circle {
+      fill: var(--cyan);
+      opacity: 0;
+      transition: opacity .5s ease, r .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    .hero-route circle.lit  { opacity: 1; }
+
+    /* Movement in the background is a preference, not a given. */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-route,
+      .hero-route line,
+      .hero-route circle { transition: none; }
     }
   </style>
 </head>
@@ -701,22 +707,40 @@
 
 <!-- HERO -->
 <section class="hero">
-  <svg class="hero-bg" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice">
-    <line class="edge" x1="180" y1="280" x2="480" y2="180" stroke="#00d4ff" stroke-width="1"/>
-    <line class="edge" x1="480" y1="180" x2="700" y2="380" stroke="#00d4ff" stroke-width="1"/>
-    <line class="edge" x1="700" y1="380" x2="920" y2="220" stroke="#00d4ff" stroke-width="1"/>
-    <line class="edge" x1="920" y1="220" x2="1120" y2="420" stroke="#00d4ff" stroke-width="1"/>
-    <line class="edge" x1="380" y1="480" x2="700" y2="380" stroke="#ffd700" stroke-width="1"/>
-    <line class="edge" x1="700" y1="380" x2="1020" y2="520" stroke="#ffd700" stroke-width="1"/>
-    <circle class="gnode" cx="180" cy="280" r="4" fill="#00d4ff"/>
-    <circle class="gnode" cx="480" cy="180" r="5" fill="#00d4ff"/>
-    <circle class="gnode" cx="700" cy="380" r="9" fill="#ffd700"/>
-    <circle class="gnode" cx="920" cy="220" r="5" fill="#00d4ff"/>
-    <circle class="gnode" cx="1120" cy="420" r="4" fill="#00d4ff"/>
-    <circle class="gnode" cx="380" cy="480" r="4" fill="#00d4ff"/>
-    <circle class="gnode" cx="1020" cy="520" r="4" fill="#00d4ff"/>
-    <circle class="gnode" cx="280" cy="140" r="3" fill="#00d4ff" opacity=".4"/>
-    <circle class="gnode" cx="1200" cy="280" r="3" fill="#00d4ff" opacity=".4"/>
+  <!-- The map stays faint; the route is drawn over it by the script below. -->
+  <svg class="hero-bg" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="hero-map">
+    <line x1="120" y1="300" x2="260" y2="150" />
+    <line x1="260" y1="150" x2="480" y2="250" />
+    <line x1="330" y1="470" x2="480" y2="250" />
+    <line x1="480" y1="250" x2="640" y2="120" />
+    <line x1="480" y1="250" x2="700" y2="380" />
+    <line x1="560" y1="560" x2="700" y2="380" />
+    <line x1="700" y1="380" x2="820" y2="520" />
+    <line x1="700" y1="380" x2="880" y2="220" />
+    <line x1="820" y1="520" x2="980" y2="430" />
+    <line x1="880" y1="220" x2="980" y2="430" />
+    <line x1="880" y1="220" x2="1080" y2="140" />
+    <line x1="980" y1="430" x2="1130" y2="330" />
+    <line x1="980" y1="430" x2="1230" y2="560" />
+    <line x1="1080" y1="140" x2="1130" y2="330" />
+    <line x1="1130" y1="330" x2="1300" y2="250" />
+    <circle cx="120" cy="300" r="5" />
+    <circle cx="260" cy="150" r="4" />
+    <circle cx="330" cy="470" r="4" />
+    <circle cx="480" cy="250" r="5" />
+    <circle cx="560" cy="560" r="4" />
+    <circle cx="640" cy="120" r="4" />
+    <circle cx="700" cy="380" r="5" />
+    <circle cx="820" cy="520" r="4" />
+    <circle cx="880" cy="220" r="4" />
+    <circle cx="980" cy="430" r="5" />
+    <circle cx="1080" cy="140" r="4" />
+    <circle cx="1130" cy="330" r="4" />
+    <circle cx="1230" cy="560" r="5" />
+    <circle cx="1300" cy="250" r="4" />
+    </g>
+    <g class="hero-route"></g>
   </svg>
 
   <div class="hero-content">
@@ -725,7 +749,8 @@
       <span class="cyan">didn't know</span> was connected
     </h1>
     <p class="hero-sub">
-      LookBeyond helps research teams find non-obvious connections across documents, articles, and topics — combining semantic search, graph visualization, and AI explanations.
+      Not a list of results — a route. LookBeyond shows how two ideas connect, document by document,
+      across disciplines and from popular writing to peer-reviewed research, with the reason each step holds.
     </p>
     <div class="hero-actions">
       <a href="#demo" class="btn-yellow">See a route →</a>
@@ -739,7 +764,7 @@
   <div class="section-inner">
     <div class="section-header">
       <div class="section-label">See it in action</div>
-      <h2>Through connection, to new knowledge and discoveries</h2>
+      <h2>Through connections, to new knowledge and discoveries</h2>
     </div>
     <p class="routes-lede">
       Each one runs on the live graph: five documents that share no keyword, four hops, every step
@@ -845,39 +870,44 @@
 <section class="features">
   <div class="section-inner">
     <div class="section-header">
-      <div class="section-label">How it works</div>
-      <h2>Beyond Algorithmic Paths</h2>
+      <div class="section-label">What you get</div>
+      <h2>Search finds documents. We find the ways between them.</h2>
     </div>
     <div class="features-grid">
       <div class="feature-card">
-        <div class="feat-icon">🕸️</div>
-        <h3>Knowledge Graph</h3>
-        <p>Visualize relationships between articles, topics, and concepts as an interactive network. See clusters and bridges you'd never find through linear search.</p>
+        <div class="feat-icon">🧭</div>
+        <h3>Discovery paths</h3>
+        <p>Pick two ideas. The route appears between them one document at a time — and you can swap any stop for another and watch it rebuild around your choice.</p>
       </div>
+
       <div class="feature-card">
-        <div class="feat-icon">🔍</div>
-        <h3>Semantic Search</h3>
-        <p>Search by meaning, not keywords. Input your research context in natural language — the graph reranks results and surfaces semantically related paths.</p>
+        <div class="feat-icon">🧱</div>
+        <h3>Routes that cross the walls</h3>
+        <p>Fields that never read each other. A news story and a peer-reviewed paper. Two repositories with nothing in common. The route crosses those lines because it follows meaning rather than citations or tags — and every stop shows which side of the line it stands on.</p>
       </div>
+
       <div class="feature-card">
-        <div class="feat-icon">🤖</div>
-        <h3>AI Explanations</h3>
-        <p>For every discovered connection, LookBeyond generates an AI explanation — so you understand <em>why</em> two seemingly unrelated topics are linked.</p>
+        <div class="feat-icon">🎯</div>
+        <h3>Search you can steer</h3>
+        <p>Say what you are looking for, then anchor it to a person, an organisation or a concept. The search follows that anchor instead of guessing what you meant.</p>
       </div>
+
+      <div class="feature-card">
+        <div class="feat-icon">💬</div>
+        <h3>Every step explained</h3>
+        <p>For each hop: what the two documents have in common, and how closely they sit. Enough to <em>judge</em> a connection rather than take it on trust.</p>
+      </div>
+
       <div class="feature-card">
         <div class="feat-icon">🗂️</div>
-        <h3>Research Projects</h3>
-        <p>Save exploration paths, build curated knowledge maps, and return to your research exactly where you left off — across sessions and topics.</p>
+        <h3>Projects that remember</h3>
+        <p>Keep what is worth returning to — a route, a lead, a view — and pick the investigation up where you left it, across sessions.</p>
       </div>
+
       <div class="feature-card">
-        <div class="feat-icon">📐</div>
-        <h3>Hierarchical Navigation</h3>
-        <p>Browse content through structured category trees. Drill deep into subtopics without losing the broader context of your investigation.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feat-icon">🔗</div>
-        <h3>Similarity Paths</h3>
-        <p>Connect any two concepts and let the graph reveal the shortest — and most surprising — routes between them through the knowledge space.</p>
+        <div class="feat-icon">🗺️</div>
+        <h3>Browse by topic</h3>
+        <p>When you would rather start from a field than from a question: walk the category tree and drop into the graph wherever it gets interesting.</p>
       </div>
     </div>
   </div>
@@ -905,7 +935,7 @@
       </div>
       <div class="audience-card">
         <h3>Publishers and journalistic agencies</h3>
-        <p> Find a place where you can monitor the thematic reach of your content, check connections between them, and find blind spots as inspiration for new thematic series. There's power in connections!.</p>
+        <p>Monitor the thematic reach of your own content, see how the pieces connect, and find the blind spots — the series you have not written yet.</p>
       </div>
     </div>
   </div>
@@ -1067,6 +1097,116 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Three routes fan out of one node behind the headline: the same starting
+  // document, three ways onward. Drawing one line said something untrue —
+  // that a document leads to one place.
+  (function () {
+    var svg = document.querySelector('.hero-bg');
+    var layer = svg && svg.querySelector('.hero-route');
+    if (!layer) return;
+
+    var NS = 'http://www.w3.org/2000/svg';
+    var points = Array.prototype.map.call(
+      svg.querySelectorAll('.hero-map circle'),
+      function (c) { return { x: +c.getAttribute('cx'), y: +c.getAttribute('cy') }; }
+    );
+
+    // Each fan shares its first node. Branches may share a prefix and part
+    // later — that reads as "same first step, different continuation".
+    var FANS = [
+      [[0, 1, 5, 10], [0, 3, 6, 9, 11], [0, 2, 4, 7, 12]],
+      [[2, 3, 5, 8, 13], [2, 6, 9, 11], [2, 4, 7, 12]],
+      [[1, 5, 10], [1, 3, 6, 8, 13], [1, 3, 6, 7, 12]]
+    ];
+    var BRANCH_COLORS = ['#00d4ff', '#ffd700', '#c77dff']; // cyan, yellow, violet
+    var START_COLOR = '#e8f1f8';                          // one origin, three directions
+
+    var HOP = 1000;     // one line drawing itself
+    var STAGGER = 420;  // so the branches leave one after another, not at once
+    var HOLD = 4000;    // the finished fan, still
+    var FADE = 1500;
+
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var lit;
+    var last = -1;
+
+    function node(index, isGoal, color) {
+      if (lit[index] && !isGoal) return; // shared by two branches — draw it once
+      lit[index] = true;
+      var c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', points[index].x);
+      c.setAttribute('cy', points[index].y);
+      c.setAttribute('r', isGoal ? 9 : 6);
+      c.style.fill = color;
+      layer.appendChild(c);
+      requestAnimationFrame(function () { c.classList.add('lit'); });
+    }
+
+    function segment(from, to, instant, color) {
+      var a = points[from], b = points[to];
+      var line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+      line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+      var length = Math.hypot(b.x - a.x, b.y - a.y);
+      line.style.stroke = color;
+      line.style.strokeDasharray = length;
+      line.style.strokeDashoffset = instant ? 0 : length;
+      layer.appendChild(line);
+      if (!instant) requestAnimationFrame(function () { line.style.strokeDashoffset = 0; });
+    }
+
+    function branch(route, delay, color, onDone) {
+      var step = 1;
+      setTimeout(function hop() {
+        if (step >= route.length) return onDone();
+        var at = step;
+        segment(route[at - 1], route[at], false, color);
+        setTimeout(function () {
+          node(route[at], at === route.length - 1, color);
+          step++;
+          hop();
+        }, HOP);
+      }, delay);
+    }
+
+    function play() {
+      var pick;
+      do { pick = Math.floor(Math.random() * FANS.length); } while (pick === last && FANS.length > 1);
+      last = pick;
+      var fan = FANS[pick];
+
+      layer.innerHTML = '';
+      layer.style.opacity = 1;
+      lit = {};
+
+      if (still) { // one finished fan, no movement at all
+        fan.forEach(function (route, b) {
+          var color = BRANCH_COLORS[b % BRANCH_COLORS.length];
+          for (var i = 1; i < route.length; i++) segment(route[i - 1], route[i], true, color);
+          route.forEach(function (n, i) { node(n, i === route.length - 1, color); });
+        });
+        node(fan[0][0], false, START_COLOR);
+        return;
+      }
+
+      node(fan[0][0], false, START_COLOR); // the shared start
+      var running = fan.length;
+      fan.forEach(function (route, i) {
+        branch(route, i * STAGGER, BRANCH_COLORS[i % BRANCH_COLORS.length], function () {
+          if (--running) return;
+          setTimeout(function () {
+            layer.style.opacity = 0;
+            setTimeout(play, FADE);
+          }, HOLD);
+        });
+      });
+    }
+
+    play();
+  })();
+</script>
 
 <script>
   // Three ways in, one form and one inbox. The card you press sets a hidden
