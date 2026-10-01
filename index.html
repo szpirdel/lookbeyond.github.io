@@ -449,6 +449,37 @@
 
     .founder-inner strong { color:var(--text); font-weight:600; }
 
+    /* Who this is open to. A plain disc marker would sit off in the muted text
+       colour; a cyan dash ties the list to the rest of the page and keeps the
+       eye on the line rather than on the bullet. */
+    .open-to-lead { margin-bottom: .7rem; }
+
+    .open-to {
+      list-style: none;
+      margin: 0 0 1.1rem;
+      padding: 0;
+    }
+
+    .open-to li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: .6rem;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+
+    .open-to li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: .85em;
+      width: .7rem;
+      height: 2px;
+      background: var(--cyan);
+      opacity: .7;
+    }
+
     .founder-sig {
       margin-top: 2rem;
       display: flex;
@@ -951,8 +982,8 @@
         <p>Find interdisciplinary connections between papers from different fields. Surface the concepts and researchers that bridge your domain to unexpected neighbors.</p>
       </div>
       <div class="audience-card">
-        <h3>Investigative Journalists</h3>
-        <p>Map relationships between actors, events, and documents. LookBeyond makes pattern recognition systematic — not dependent on what you already know to search for.</p>
+        <h3>Business & Product Teams</h3>
+        <p>Make cross-functional sharing and open collaboration finally work. The knowledge is already there — it is just scattered across projects, departments and business contexts. Combine them into a single instance and see the precedents, risks, and outcomes behind every new decision.</p>
       </div>
       <div class="audience-card">
         <h3>Publishers and journalistic agencies</h3>
@@ -972,23 +1003,19 @@
     <div class="section-label">The story behind it</div>
     <h2 style="margin-bottom:1.8rem;">Why we're building this...</h2>
     <p>
-      What you need usually sits <strong>between</strong> documents, not inside any one of them.
-      Finding it takes the kind of time only large research teams can afford.
+      Knowledge doesn't live in a single paper, database or institution. <strong>Its strength is in how they connect</strong>, and the most useful findings tend to sit where fields cross: chemistry and medicine, research and the way it reaches the public.
     </p>
     <p>
-      Most tools connect things for you — a link, a “see also”, a “you might also like”. They are
-      good at returning you to where you have been, and poor at taking you somewhere you had no
-      reason to ask about.
+     LookBeyond is built for those crossings. You say what you're looking for, as narrowly as you like, and it lays out the route between ideas, with the reason each step holds. Nothing is suggested because of what you clicked last week. The question stays yours.
     </p>
-    <p>
-      LookBeyond works the other way round. <strong>You say what you are looking for</strong>, as
-      narrow as you like, and it lays out the route between ideas with the reason each step holds.
-      Nothing is suggested because of what you clicked last week. The question stays yours.
-    </p>
-    <p>
-      We are looking for a small number of partners — collaborators, not beta testers.
-      <strong>Founding partners get free access, forever.</strong>
-    </p>
+   
+    <p class="open-to-lead"><strong>We're opening LookBeyond to:</strong></p>
+    <ul class="open-to">
+      <li>Investors who want to back a different way of finding knowledge.</li>
+      <li>Editorial teams and publishers ready to test it and, if it fits, publish open content within it.</li>
+      <li>Businesses that want to explore their own corpus and use it directly in their daily cases.</li>
+      <li>Anyone curious — come and see how it works.</li>
+    </ul>
   </div>
 </section>
 
